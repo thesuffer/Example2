@@ -1,0 +1,235 @@
+﻿{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "${Localization.MatchesFound} ${Payload.ResultsCount}",
+      "wrap": true
+    },
+    {
+      "type": "Container",
+      "$data": "${Payload.Employees}",
+      "items": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "Image",
+                  "url": "${Image}",
+                  "size": "Medium"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "ColumnSet",
+                  "columns": [
+                    {
+                      "type": "Column",
+                      "width": "auto",
+                      "items": [
+                        {
+                          "type": "TextBlock",
+                          "text": "${NameRU}",
+                          "wrap": true,
+                          "weight": "Bolder"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Column",
+                      "width": "auto",
+                      "items": [
+                        {
+                          "type": "TextBlock",
+                          "text": "${NameEN}",
+                          "wrap": true
+                        }
+                      ],
+                      "separator": true
+                    }
+                  ],
+                  "spacing": "None"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "${PositionName}",
+                  "wrap": true,
+                  "spacing": "None"
+                },
+                {
+                  "type": "ColumnSet",
+                  "columns": [
+                    {
+                      "type": "Column",
+                      "width": "auto",
+                      "items": [
+                        {
+                          "type": "TextBlock",
+                          "text": "Ext.",
+                          "wrap": true,
+                          "weight": "Bolder"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Column",
+                      "width": "auto",
+                      "items": [
+                        {
+                          "type": "TextBlock",
+                          "text": "${Ext}",
+                          "wrap": true
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Column",
+                      "width": "auto",
+                      "separator": true,
+                      "items": [
+                        {
+                          "type": "TextBlock",
+                          "text": "${$root.Localization.Mob}",
+                          "wrap": true,
+                          "weight": "Bolder"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Column",
+                      "width": "auto",
+                      "items": [
+                        {
+                          "type": "TextBlock",
+                          "text": "${Mob}",
+                          "wrap": true
+                        }
+                      ]
+                    }
+                  ],
+                  "spacing": "None"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ActionSet",
+          "actions": [
+            {
+              "type": "Action.Submit",
+              "title": "${$root.Localization.OpenProfile}",
+              "data": {
+                "Value": "OpenProfile",
+                "WWID": "${Id}"
+              }
+            }
+          ]
+        }
+      ],
+      "separator": true
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "${Localization.Page} ${Payload.PageNumber} ${Localization.Of} ${Payload.PagesCount}",
+          "wrap": true,
+          "weight": "Lighter",
+          "horizontalAlignment": "Center",
+          "fontType": "Default",
+          "size": "Small",
+          "isSubtle": true
+        }
+      ]
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "ActionSet",
+          "horizontalAlignment": "Center",
+          "actions": [
+              {
+                "type": "Action.Submit",
+                "title": "<",
+                "associatedInputs": "none",
+                "data": {
+                  "Value": "ChangePage",
+                  "PageNumber": "${Payload.FirstPage - 4}"
+                },
+                "horizontalAlignment": "Center",
+                "$when": "${Payload.PageNumber > 4}"
+              },
+              {
+                "type": "Action.Submit",
+                "title": "${Payload.FirstPage}",
+                "associatedInputs": "none",
+                "data": {
+                  "Value": "ChangePage",
+                  "PageNumber": "${Payload.FirstPage}"
+                },
+                "horizontalAlignment": "Center",
+                "$when": "${Payload.LastPage - Payload.FirstPage > 0}"
+              },
+              {
+                "type": "Action.Submit",
+                "title": "${Payload.FirstPage + 1}",
+                "associatedInputs": "none",
+                "data": {
+                  "Value": "ChangePage",
+                  "PageNumber": "${Payload.FirstPage + 1}"
+                },
+                "horizontalAlignment": "Center",
+                "$when": "${Payload.LastPage - Payload.FirstPage > 0}"
+              },
+              {
+                "type": "Action.Submit",
+                "title": "${Payload.FirstPage + 2}",
+                "associatedInputs": "none",
+                "data": {
+                  "Value": "ChangePage",
+                  "PageNumber": "${Payload.FirstPage + 2}"
+                },
+                "horizontalAlignment": "Center",
+                "$when": "${Payload.LastPage - Payload.FirstPage > 1}"
+              },
+              {
+                "type": "Action.Submit",
+                "title": "${Payload.FirstPage + 3}",
+                "associatedInputs": "none",
+                "data": {
+                  "Value": "ChangePage",
+                  "PageNumber": "${Payload.FirstPage + 3}"
+                },
+                "horizontalAlignment": "Center",
+                "$when": "${Payload.LastPage - Payload.FirstPage > 2}"
+              },
+              {
+                "type": "Action.Submit",
+                "title": ">",
+                "associatedInputs": "none",
+                "data": {
+                  "Value": "ChangePage",
+                  "PageNumber": "${Payload.LastPage + 1}"
+                },
+                "horizontalAlignment": "Center",
+                "$when": "${Payload.LastPage < Payload.PagesCount}"
+              }
+          ]
+        }
+      ]
+    }
+  ]
+}

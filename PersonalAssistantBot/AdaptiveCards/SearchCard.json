@@ -1,0 +1,49 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.4",
+  "body": [
+    {
+      "type": "ColumnSet",
+      "columns": [
+        {
+          "type": "Column",
+          "width": "stretch",
+          "items": [
+            {
+              "type": "Input.Text",
+              "isRequired": true,
+              "placeholder": "${Localization.Placeholder}",
+              "id": "Value",
+              "inlineAction": {
+                "type": "Action.Submit",
+                "title": "${Localization.SerchButtonText}",
+                "id": "1"
+              },
+              "errorMessage": "${Localization.ValidationError}"
+            }
+          ]
+        },
+        {
+          "type": "Column",
+          "width": "32px",
+          "items": [
+            {
+              "type": "Image",
+              "url": "${LanguageIcon}",
+              "size": "Small",
+              "selectAction": {
+                "type": "Action.Submit",
+                "id": "Value",
+                "data": {
+                  "Value": "ChangeLanguage"
+                },
+                "associatedInputs": "none"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
